@@ -1,0 +1,7 @@
+Flask
+Flask-Cors
+paramiko
+mysql-connector-python
+rsa
+requests
+pyjwt

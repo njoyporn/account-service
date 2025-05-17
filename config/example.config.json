@@ -1,0 +1,159 @@
+{
+    "account_service": {
+        "hostname":"0.0.0.0",
+        "port": 8621,
+        "cors_enabled": true,
+        "allowed_domains":["https://njoyporn.com", "http://localhost:5173"],
+        "rsa_enabled": true
+    },
+    "database":{
+        "hostname":"njoyporn.com",
+        "port":8622,
+        "name":"njoy_account_service",
+        "page_size": 15,
+        "admin":{
+            "username":"root",
+            "password":"verysecret"
+        },
+        "user":{
+            "username":"guest",
+            "password":"secret"
+        },
+        "tables": [
+            {
+                "name":"accounts",
+                "fields":[
+                    {
+                        "name":"id",
+                        "type":"varchar(2048)",
+                        "std":"not null"
+                    },
+                    {
+                        "name":"username",
+                        "type":"varchar(2048)",
+                        "std":"not null"
+                    },
+                    {
+                        "name":"nickname",
+                        "type":"varchar(128)",
+                        "std":""
+                    },
+                    {
+                        "name":"verifier",
+                        "type":"binary(32)",
+                        "std":"not null"
+                    },
+                    {
+                        "name":"salt",
+                        "type":"binary(32)",
+                        "std":"not null"
+                    },
+                    {
+                        "name":"email_address",
+                        "type":"varchar(2048)",
+                        "std":"not null"
+                    },
+                    {
+                        "name":"role",
+                        "type":"varchar(64)",
+                        "std":"not null"
+                    },
+                    {
+                        "name":"sub_role",
+                        "type":"varchar(64)",
+                        "std":""
+                    },
+                    {
+                        "name":"member_of",
+                        "type":"varchar(1024)",
+                        "std":""
+                    },
+                    {
+                        "name":"datetime",
+                        "type": "datetime",
+                        "std": "not null"
+                    },
+                    {
+                        "name":"verified",
+                        "type": "datetime",
+                        "std": ""
+                    },
+                    {
+                        "name":"soft_delete",
+                        "type": "bool",
+                        "std":"default 0"
+                    }
+                ]
+            }
+        ],
+        "serviceTables": [
+            {
+                "name":"serviceState",
+                "fields":[
+                    {
+                        "name":"id",
+                        "type":"int",
+                        "std":"auto_increment primary key"
+                    },
+                    {
+                        "name":"name",
+                        "type":"varchar(128)",
+                        "std":"not null"
+                    },
+                    {
+                        "name":"value",
+                        "type":"varchar(1024)",
+                        "std":""
+                    },
+                    {
+                        "name":"comment",
+                        "type":"varchar(1024)",
+                        "std":""
+                    },
+                    {
+                        "name":"datetime",
+                        "type": "datetime",
+                        "std": "not null"
+                    },
+                    {
+                        "name":"soft_delete",
+                        "type": "bool",
+                        "std":"default 0"
+                    }
+                ]
+            }
+        ]
+    },
+    "roles":{
+        "administrator":"administrator",
+        "moderator":"moderator",
+        "user":"user",
+        "guest":"guest"
+    },
+    "limits":{
+        "request_limit":{
+            "guest":1000,
+            "user":10000,
+            "moderator":"~~",
+            "administrator":"~~"
+        }
+    },
+    "security":{
+        "keys":{
+            "key_directory": "/backend_shared/security/.keys",
+            "public_key_path": "/backend_shared/security/.keys/public_key.pem",
+            "private_key_path": "/backend_shared/security/.keys/private_key.pem"
+        }
+    },
+    "verwaltung":{
+        "admin":{
+            "username":"admin",
+            "password":"verysecret",
+            "email":"info@njoy.com"
+        }
+    },
+    "data":{
+        "path":"data"
+    },
+    "debug":false
+}
