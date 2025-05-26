@@ -29,7 +29,7 @@ class Executer:
         return result
     
     def delete_account(self, id):
-        pass
+        self.connection.execute(f"delete from {self.config["database"]["name"]}.{self.config["database"]["tables"][0]["name"]} where id = {id}")
 
     def get_account_by_username(self, username):
         q = f'''select * from {self.config['database']['name']}.{self.config['database']['tables'][0]['name']} 
@@ -40,5 +40,18 @@ class Executer:
         return result
     
     def get_account_by_id(self, id):
-        rc, result = self.connection.execute(f"select * from {self.config['database']['name']}.{self.config['database']['tables'][0]['name']} where id = {id}")
+        rc, result = self.connection.execute(f"select * from {self.config['database']['name']}.{self.config['database']['tables'][0]['name']} where id = '{id}'")
         return result
+    
+    def get_verification_entry(self, id, code):
+        rc, result = self.connection.execute(f"select * from {self.config['database']['name']}.{self.config['database']['tables'][1]['name']} where id = '{id}' and code = '{code}' and soft_delete = 0")
+        return result
+    
+    def verify_account(self, id):
+        rc, result = self.connection.execute(f'''update {self.config["database"]["name"]}.{self.config["database"]["tables"][0]["name"]} set verified = '{datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')}' where id = "{id}"''')
+
+    def update_account_verification(self, id):
+        rc, result = self.connection.execute(f'''update {self.config["database"]["name"]}.{self.config["database"]["tables"][1]["name"]} set verified_at = '{datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')}', soft_delete = 1 where id = "{id}"''')
+
+    def create_verification_code(self, id, code):
+        rc, result = self.connection.execute(f'''insert into {self.config["database"]["name"]}.{self.config["database"]["tables"][1]["name"]} (id, code, created_at) values ('{id}', '{code}', '{datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')}')''')

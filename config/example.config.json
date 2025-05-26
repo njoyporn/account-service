@@ -3,8 +3,16 @@
         "hostname":"0.0.0.0",
         "port": 8621,
         "cors_enabled": true,
-        "allowed_domains":["https://njoyporn.com", "http://localhost:5173"],
-        "rsa_enabled": true
+        "allowed_domains":["your-domain-url"],
+        "rsa_enabled": true,
+        "allow_account_creation":true,
+        "verify_email":true
+    },
+    "connectors": {
+        "email": {
+            "host":"http://your-mail-server",
+            "port":"8661"
+        }
     },
     "database":{
         "hostname":"njoyporn.com",
@@ -84,6 +92,36 @@
                         "std":"default 0"
                     }
                 ]
+            },
+                        {
+                "name":"account_verification",
+                "fields":[
+                    {
+                        "name":"id",
+                        "type":"varchar(32)",
+                        "std":"not null"
+                    },
+                    {
+                        "name":"code",
+                        "type":"varchar(32)",
+                        "std":"not null"
+                    },
+                    {
+                        "name":"created_at",
+                        "type": "datetime",
+                        "std": "not null"
+                    },
+                    {
+                        "name":"verified_at",
+                        "type": "datetime",
+                        "std": ""
+                    },
+                    {
+                        "name":"soft_delete",
+                        "type": "bool",
+                        "std":"default 0"
+                    }
+                ]
             }
         ],
         "serviceTables": [
@@ -149,7 +187,7 @@
         "admin":{
             "username":"admin",
             "password":"verysecret",
-            "email":"info@njoy.com"
+            "email":"info@your-host.com"
         }
     },
     "data":{

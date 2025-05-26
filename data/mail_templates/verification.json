@@ -1,0 +1,6 @@
+{
+    "From":"info@njoyporn.com",
+    "To":"",
+    "Subject":"Please verify your Email",
+    "Content":"<html style='margin:0;padding:0;overflow:hidden;height:100%;width:100%;background-color:rgba(32,32,32,1);'><body style='margin:0;padding:0;height:100%;width:100%;display:flex;'><div style='height:7rem;width:20rem;border:1px solid rgba(255,255,255,.75);padding:1rem;'><p style='color: white; text-align:justify;'>Thank you for creating an account. Please verifiy your Account by clicking on the link below</p><a style='font-size: 1.5rem;color:rgba(22,245,91,1);font-weight:700;' href='https://njoyporn.com/verify-account/{{ID}}/{{CODE}}'>Verify</a></div></body></html>"
+}

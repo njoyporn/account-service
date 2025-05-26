@@ -2,6 +2,7 @@ import json, os, requests, re
 from backend_shared.security import verifier, crypt
 from backend_shared.database import db_executer, db_connection
 from backend_shared.logger import colors, logger
+from backend_shared.types import document as DocType, Links
 from backend_shared.utils import random
 
 class Utils:
@@ -39,7 +40,7 @@ class Utils:
         else:
             email = self.verifier.escape_characters(self.config["verwaltung"]["admin"]["email"])
         salt, verifier = self.verifier.get_registrationData(username, password)
-        self.db_executer.create_account(self.random.CreateRandomId(), username, "account-service", verifier, salt, email, self.config["roles"]["administrator"], "default")
+        self.db_executer.create_account(self.random.CreateRandomId(), username, "njoyporn", verifier, salt, email, self.config["roles"]["administrator"], "default")
         if not self.verifier.verify_account(username, password):
             return "{'error':'Error creating an account'}"
         self.logger.log("INFO", "admin user created")

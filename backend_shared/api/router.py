@@ -33,6 +33,10 @@ def log_out():
 def register_account():
     return request_handler.register_account(request)
 
+@api.route(f"{base_route}/verify-account", methods=["GET"])
+def verify_account():
+    return request_handler.verify_account(request)
+
 def run(conf):
     global config, request_handler
     config = conf
